@@ -240,6 +240,7 @@ class IndexController extends HomeBaseController
     public function logout()
     {
         session("user", null);//只有前台用户退出
+        session("shuliang", null);//只有前台用户退出
         return redirect("shop/index/index");
     }
 

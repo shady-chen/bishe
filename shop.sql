@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-12 17:40:53
+Date: 2017-12-14 17:49:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -759,15 +759,12 @@ CREATE TABLE `s_order2` (
   KEY `address_id` (`address_id`),
   KEY `send_id` (`send_id`),
   KEY `goods_id` (`goods_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of s_order2
 -- ----------------------------
-INSERT INTO `s_order2` VALUES ('5', '1', '', '15880630261', '', '2', '0', '1', '8', '2', '1', 'No47386633945', '1', '1513063583', '1513063583', null);
-INSERT INTO `s_order2` VALUES ('4', '1', '', '15880630261', '', '2', '0', '1', '8', '2', '1', 'No98745579316', '0', '1513063197', '1513063197', null);
-INSERT INTO `s_order2` VALUES ('8', '1', '', '15880630261', '', '1', '0', '1', '8', '2', '1', 'No22713838688', '1', '1513066295', '1513066295', null);
-INSERT INTO `s_order2` VALUES ('7', '1', '', '15880630261', '', '1', '0', '1', '8', '2', '1', 'No27757551918', '1', '1513066231', '1513066231', null);
+INSERT INTO `s_order2` VALUES ('1', '1', '', '15880630261', '', '1', '0', '1', '8', '1', '1', 'No18766937456', '1', '1513223699', '1513223699', null);
 
 -- ----------------------------
 -- Table structure for `s_pay_type`
@@ -1039,13 +1036,11 @@ CREATE TABLE `s_shopping_cart` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `goods_id` (`goods_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of s_shopping_cart
 -- ----------------------------
-INSERT INTO `s_shopping_cart` VALUES ('1', '8', '1', '1', '1513068704', '1513068704', null);
-INSERT INTO `s_shopping_cart` VALUES ('2', '8', '3', '1', '1513068712', '1513068712', null);
 
 -- ----------------------------
 -- Table structure for `s_slide`
@@ -1208,7 +1203,7 @@ CREATE TABLE `s_user` (
 -- Records of s_user
 -- ----------------------------
 INSERT INTO `s_user` VALUES ('1', '1', '0', '0', '1512613308', '0', '0', '1512438225', '1', 'admin', '###04fd0e59ee36e0c6c0a235fcac2e7819', 'admin', 'shady@qq.com', '', '', '', '127.0.0.1', '', '', null);
-INSERT INTO `s_user` VALUES ('8', '2', '0', '0', '1513069094', '6', '0', '1512462341', '1', '', '###79e38896911e1a64349643c889505af4', '', '', '', '', '', '127.0.0.1', '', '15880630261', null);
+INSERT INTO `s_user` VALUES ('8', '2', '0', '0', '1513237326', '7', '0', '1512462341', '1', '', '###79e38896911e1a64349643c889505af4', '', '', '', '', '', '127.0.0.1', '', '15880630261', null);
 INSERT INTO `s_user` VALUES ('9', '2', '0', '0', '1512462453', '0', '0', '1512462453', '1', '', '###79e38896911e1a64349643c889505af4', '', '', '', '', '', '127.0.0.1', '', '15880630262', null);
 
 -- ----------------------------
@@ -1306,7 +1301,7 @@ CREATE TABLE `s_user_score_log` (
   `score` int(11) NOT NULL DEFAULT '0' COMMENT '更改积分，可以为负',
   `coin` int(11) NOT NULL DEFAULT '0' COMMENT '更改金币，可以为负',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='用户操作积分等奖励日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='用户操作积分等奖励日志表';
 
 -- ----------------------------
 -- Records of s_user_score_log
@@ -1317,6 +1312,7 @@ INSERT INTO `s_user_score_log` VALUES ('3', '8', '1512696560', 'login', '1', '0'
 INSERT INTO `s_user_score_log` VALUES ('4', '8', '1512802557', 'login', '1', '0');
 INSERT INTO `s_user_score_log` VALUES ('5', '8', '1512953728', 'login', '1', '0');
 INSERT INTO `s_user_score_log` VALUES ('6', '8', '1513061134', 'login', '1', '0');
+INSERT INTO `s_user_score_log` VALUES ('7', '8', '1513215013', 'login', '1', '0');
 
 -- ----------------------------
 -- Table structure for `s_user_token`

@@ -21,8 +21,8 @@
             <ul class="list-unstyled">
                 <li class=" pull-left">欢迎来酒仙网！</li>
                 <if condition="$cur_user">
-                    <li class=" pull-left">{$cur_user.mobile},你好！</li>
-                    <li class=" pull-left"><a href="{:url('')}" class="text-danger">退出登录</a></li>
+                    <li class=" pull-left"><a href="">{$cur_user.mobile},你好！</a></li>
+                    <li class=" pull-left"><a href="{:url('shop/index/logout')}" class="text-danger">退出登录</a></li>
                     <else />
                     <li class=" pull-left"><a href="{:url('shop/login/index')}">请登录</a></li>
                     <li class=" pull-left"><a href="{:url('shop/register/index')}">免费注册</a></li>
