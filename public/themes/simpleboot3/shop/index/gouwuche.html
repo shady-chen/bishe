@@ -1,0 +1,272 @@
+<include file="/public/header"  />
+
+<link rel="stylesheet" href="__STATIC__/shop/css/gouwuche.css">
+<!--main-->
+    <notempty name="$goodslist">
+        <div id="purchase">
+            <!--商品详情-->
+            <div class="operation">
+                <a href="" class="pull-right select-all">全选</a>
+                <a href="" class="pull-right delete">删除</a>
+                <div class="clear"></div>
+            </div>
+
+            <volist name="$goodslist" id="data">
+                <div class="goods">
+                    <div class="left">
+                        <img src="{$data.img_url}" alt="">
+                    </div>
+                    <div class="right">
+                        <div class="good_attributes">
+                            <p class="jieshao">
+                                商品名称
+                            </p>
+                            <p class="goods_name">
+                                {$data.name}
+                            </p>
+                        </div>
+                        <div class="good_attributes">
+                            <p class="jieshao">
+                                商品规格
+                            </p>
+                            <p class="goods_guige">
+                                {$data.guige}
+                            </p>
+                        </div>
+                        <div class="good_attributes">
+                            <p class="jieshao">
+                                商品价格
+                            </p>
+                            <p class="goods_shj">
+                                {$data.shj}￥
+                            </p>
+                        </div>
+
+                        <div class="good_attributes">
+                            <p class="jieshao">
+                                购买数量
+                            </p>
+                            <p class="goods_count">
+                                <span class="reduce" onclick="reduce({$i})">-</span> <span class="count  count-{$i}">1</span> <span class="add-count" onclick="addCount({$i})">+</span>
+                            </p>
+                        </div>
+
+
+
+                        <div class="good_attributes">
+                            <p class="jieshao">
+                                商品总价
+                            </p>
+                            <p class="goods_total">
+                                <span class="star total-price" id="total-price-{$i-1}">{$data.shj}</span>￥
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="choose">
+                        <input type="checkbox" name="checkbox-{$i}"  class="choose-input" value="{$data.id}" checked>
+                    </div>
+                </div>
+            </volist>
+            <div class="tot">
+                <button class="ok-btn" onclick="showTask()">支付并购买</button>
+                <p class="ttt pull-right">
+                    总价:<span class="star" id="final-price">0</span>￥
+                </p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <else />
+        <div id="purchase2">
+            <h3 style="font-size: 20px;">暂无数据 <a href="{:url('shop/index/index')}" style="font-size: 20px;color: blue;">去看看吧...</a></h3>
+        </div>
+    </notempty>
+
+<!--task-->
+
+<div id="task">
+    <div id="tips">
+        <p class="tips-title">提示</p>
+        <div class="tips-body">
+            正在确定...
+        </div>
+        <div class="tips-footer">
+
+            <button class="close-task">关闭</button>
+        </div>
+    </div>
+
+    <div id="tips2">
+        <h3>填写收货信息</h3>
+        <div class="add">
+            <label for="address" class="choose-add text-center"><span class="star">*</span>请选择收货地址</label>
+
+            <if condition="!empty($addlist)" >
+                <select name="address" id="address">
+                    <volist name="$addlist" id="vo">
+                        <option value="{$vo.id}">
+                            {$vo.address}
+                        </option>
+                    </volist>
+                </select>
+                <else />
+                <input type="text" name="address" id="address" value="" style="border: 1px solid #000;box-sizing: border-box;" placeholder="请输入您的收货地址..">
+            </if>
+
+
+
+        </div>
+        <div class="clear"></div>
+
+        <div class="phone">
+            <label for="phone" class="for-phone text-center"><span class="star">*</span>收货手机号码</label>
+            <input type="text" id="phone"  name="phone" value="{$cur_user.mobile}" placeholder="请输入您的收货号码..">
+        </div>
+
+        <div class="clear"></div>
+        <div class="pay-way">
+            <label  class="for-pay text-center"><span class="star">*</span>支付方式</label>
+            <input type="radio" name="pay-way" value="1" checked>支付宝
+            <input type="radio" name="pay-way" value="2">微信
+            <input type="radio" name="pay-way" value="3">货到付款
+        </div>
+
+
+        <div class="clear"></div>
+        <div class="pay-way">
+            <label  class="for-pay text-center">配送方式</label>
+            <input type="radio" name="send-way" value="1" checked>顺丰
+            <input type="radio" name="send-way" value="2">中通
+            <input type="radio" name="send-way" value="3">韵达
+            <span class="star pull-right">不选的情况下,默认是款顺丰</span>
+        </div>
+
+
+        <div class="clear"></div>
+
+        <div class="pay-way">
+            <label  class="for-pay text-center">备注</label>
+            <textarea name="bz" placeholder="不要太甜,还是不要太辣?" id="txt-bz" style="width: 86%;height: 50px;box-sizing:border-box;font-size: 16px;text-indent:15px;line-height: 50px;" ></textarea>
+        </div>
+        <button class="ok-btn" onclick="buyAll()" style="display: block;margin:15px auto;float: none;">OK</button>
+    </div>
+</div>
+
+<!--/task-->
+<script>
+
+    //-1
+    function reduce(i)
+    {
+        var count = parseInt($(".count").eq(i-1).html());
+        if(count == 1)
+        {
+            return false;
+        }
+        count--;
+        $(".count").eq(i-1).html(count);
+
+        $('#total-price-'+(i-1)).html(count*parseInt($('.goods_shj').eq(i-1).html()));
+        totalPrice()
+
+    }
+    //+1
+    function addCount(i)
+    {
+        var count = parseInt($(".count").eq(i-1).html());
+        count++;
+        $(".count").eq(i-1).html(count);
+
+        $('#total-price-'+(i-1)).html(count*parseInt($('.goods_shj').eq(i-1).html()));
+        totalPrice()
+    }
+    //总价
+    function totalPrice()
+    {
+        var sum = 0;
+        for(var i = 0;i<$('.total-price').length;i++)
+        {
+            sum += parseInt($('.total-price').eq(i).html());
+        }
+        $("#final-price").html(sum);
+    }
+    totalPrice()
+
+    function buyAll()
+    {
+        $("#task #tips2").hide();
+        $("#task").show();
+        $("#task #tips").show();
+        var x= 0;
+        for(var i = 0;i<$('.choose-input').length;i++)
+        {
+
+            if($('.choose-input').eq(i).is(':checked'))
+            {
+                x++;
+                buyOne($('.choose-input').eq(i).val(),$(".count").eq(i).html(),x);
+            }
+        }
+
+
+    }
+    var ringS = 0;
+    function buyOne(goods_id,goods_count,num)
+    {
+        var g_id = goods_id;
+        var g_count = goods_count;
+        var numb = num;
+        $.ajax({
+            url:"{:url('shop/index/purchase')}",
+            type:"post",
+            data:{
+                "pay_type_id":$("input[name=pay-way]").val(),
+                "bz":$('#txt-bz').val(),
+                "phone":$("#phone").val(),
+                "address":$('#address').val(),
+                "pay_way":$("input[name=pay-way]").val(),
+                "send_way":$("input[name=send-way]").val(),
+                "goods_id":g_id,
+                "goods_count":g_count,
+                "user_id":"{$cur_user.id}",
+                "origin":"gouwuche",
+            },
+            success:function()
+            {
+                ringS++
+                var str = "共" + ringS + "个成功";
+                $('.tips-body').html(str);
+            },
+            error:function()
+            {
+
+            }
+        });
+    }
+    //show task
+    function showTask()
+    {
+        $("#task #tips").hide();
+        $("#task").show();
+        $("#task #tips2").show();
+    }
+
+
+
+    // task
+
+        $('#task').click(function(e){
+            if(e.target != this)
+            {
+                return ;
+            }
+            $(this).hide();
+        });
+        $('.close-task').click(function(){
+            $('#task').hide();
+            window.location.reload(true);
+        });
+
+</script>

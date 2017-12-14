@@ -1,0 +1,107 @@
+<include file="/public/header"  />
+<script src="__STATIC__/shop/js/xiangqing.js"></script>
+<script src="__STATIC__/shop/js/myAutoplay.js"></script>
+	<!-- 商品详情开始 -->
+	<div class="shop-detail ct">
+		<!-- 最顶层的广告 -->
+		<img src="__STATIC__/shop/img/xiangqing/1-1.jpg" alt="">
+		<!-- 当前位置信息 -->
+
+		<!-- 商品详情 -->
+		<div class="shop-detail-main">
+			<!-- 商品详情左边 -->
+			<div class="shop-detail-main-left">
+				<div class="img-wrap">
+					<img src="{$data.img_url}" alt="" class="shop-img">
+					<div class="img-tool">
+						
+					</div>
+					
+				</div>
+					<div class="morebig">
+						<img src="{$data.img_url}" alt="">
+					</div>
+
+					<p>商品编号：010064910</p>
+			</div>
+			<!-- 商品详情中间 -->
+			<div class="shop-detail-main-center">
+				<p class="good-title">{$data.name}</p>
+
+
+				<div class="shop-detail-main-center-main">
+					<p class="jiuxianjia">酒仙价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{$data.shj+80}￥</span></p>
+					<p class="shj-p">促销价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{$data.shj}￥</span></p>
+					<p class="good-guige">规格 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{$data.guige}</span></p>
+					<p class="kucun">库存数量&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 18px;font-weight: 700;">{$data.kucun}&nbsp;</span>&nbsp;&nbsp;瓶</p>
+				</div>
+				<p class="many">
+					数量&nbsp&nbsp&nbsp&nbsp&nbsp
+					<button>-</button>
+					<input type="text" value="1" style="text-align:center;font-size: 16px;font-weight: 700;" name="goods_count" id="goods_count">
+					<button>+</button>
+				</p>
+
+				<input type="hidden" value="{:cmf_get_current_user_id()}" name="user_id" id="user_id">
+				<input type="hidden" value="{$data.id}" name="goods_id" id="good_id">
+				<p style="cursor: pointer;" onclick="addGodds()" class="cart-btn">加入购物车</p>
+				<p style="cursor: pointer;" onclick="xiaDan()" class="cart-btn buy-now">立即购买</p>
+			</div>
+
+			<!-- 商品详情右边 -->
+			<div class="shop-detail-main-right">
+				<p class="shop-detail-main-right-p">售后无忧</p>
+				<p>七天无理由退货</p>
+				<p class="shop-detail-main-right-p">售后补充</p>
+				<p>啤/老酒无理由不退</p>
+				<p class="shop-detail-main-right-p">满百包邮</p>
+				<p>偏远地区满1000包</p>
+				<p class="shop-detail-main-right-p">正品保证</p>
+				<p>厂家直供 品质放心</p>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+		<h2 style="font-size: 28px;margin-top: 15px;margin-bottom: 15px;">商品介绍：</h2>
+		<div style="font-size: 14px;font-weight: 700;">
+			{:html_entity_decode($data.description)}
+		</div>
+
+	</div>
+
+	<!-- 商品详情结束 -->
+<include file="public/footer" />
+<script>
+	//加入购物车
+	function addGodds()
+	{
+	    $.ajax
+		({
+			url:"{:url('shop/index/jointCart')}",
+			type:"POST",
+			data:{"goods_id":$("#good_id").val(),"user_id":$("#user_id").val(),"goods_count":$("#goods_count").val()},
+			dataType:"json",
+			success:function(data)
+			{
+                console.log(data);
+                $("#task").show();
+				$("#tips .tips-body").html(data.msg);
+			},
+			error:function(msg)
+			{
+                console.log(msg);
+			}
+		});
+	};
+
+    /**
+	 * 购买---->下单
+     */
+	function xiaDan()
+	{
+
+	    window.location.href = "{:url('shop/index/buy',['id'=>$data.id])}";
+	    return false;
+
+	}
+</script>

@@ -1,0 +1,388 @@
+<include file="/public/header"  />
+<style>
+     #purchase
+     {
+          width:1200px;
+          margin:0 auto;
+          /*border: 1px solid #000;*/
+         margin-top:15px;
+         padding-bottom:60px;
+     }
+     .clear{
+          clear: both;
+     }
+     .goods
+     {
+          height:200px;
+          width:100%;
+          background: #e2e2e2;
+     }
+     .goods>.left
+     {
+          float: left;
+          width:25%;
+          height:100%;
+     }
+     .goods>.right
+     {
+          float: left;
+          width:75%;
+          height:100%;
+          
+     }
+     .goods>.left img
+     {
+          width:100%;
+          height:100%;
+          float: left;
+     }
+     .good_attributes
+     {
+          width:20%;
+          height:100%;
+          float: left;
+     }
+     .jieshao
+     {
+         text-align:center;
+          height:50%;
+          line-height:100px;
+          color: #000;
+         font-size:24px;
+     }
+    .goods_name,.goods_guige,.goods_shj,.goods_count
+    {
+        font-size:26px;
+        text-align: center;
+        color: #330066;
+        line-height:28px;
+    }
+     .goods_name{
+         font-size:18px;
+     }
+     .goods_count
+     {
+         height:30px;
+         line-height:30px;
+     }
+     .goods_shj
+     {
+         color: #ff5a4d;
+     }
+     .user_profile
+     {
+         margin-top:15px;
+         color:#000;
+         border-top:1px solid #000;
+         font-size:24px;
+     }
+     .user_profile h2
+     {
+         font-size: 24px;
+         height:50px;
+         margin:15px 0;
+         line-height:50px;
+     }
+    .choose-add
+    {
+        font-size:18px;
+        width:13%;
+        float: left;
+        height:50px;
+        line-height:50px;
+        background: #a8a8a8;
+    }
+    #address
+    {
+        width:87%;
+        height:50px;
+        font-size:18px;
+        float: left;
+        text-indent:10px;
+
+    }
+    .phone{
+        height:50px;
+        line-height:50px;
+        margin-top:25px;
+    }
+    .for-phone
+    {
+        float: left;
+        width:13%;
+        background: #a8a8a8;
+        font-size:18px;
+    }
+    #phone{
+        border:1px solid rgb(169, 169, 169);
+        width:87%;
+        height:50px;
+        font-size:18px;
+        float: left;
+        box-sizing:border-box;
+        font-weight:700;
+        text-indent:10px;
+
+    }
+    .star
+    {
+        color: red!important;
+        font-size: 24px;
+    }
+    .text-center
+    {
+        text-align: center!important;
+    }
+
+    .pay-way
+    {
+        height:50px;
+        line-height:50px;
+        margin-top:25px;
+        font-size:18px;
+    }
+    .for-pay
+    {
+        float: left;
+        width:13%;
+        background: #a8a8a8;
+        font-size:18px;
+    }
+    input[name=pay-way],input[name=send-way]
+    {
+        height:30px;
+        width:30px;
+        margin-left:15px;
+    }
+    .btn{
+        height:50px;
+        line-height:50px;
+        margin-top:25px;
+    }
+    .total
+    {
+        float:right;
+        font-size:18px;
+    }
+    .ok-btn
+    {
+        float: right;
+        background: #50ffaf;
+        color: #fff;
+        font-size:18px;
+        padding:10px 35px;
+        cursor:pointer;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+    }
+    .reduce,.add-count
+    {
+        height:30px;
+        width:30px;
+        display: inline-block;
+        background: gray;
+        cursor: pointer;
+        -webkit-user-select: none;
+    }
+    .count
+    {
+        width:30px;
+        height: 30px;
+        line-height:30px;
+        background: #fff;
+        font-size:16px;
+        display: inline-block;
+        -webkit-user-select: none;
+    }
+</style>
+<!--main-->
+     <div id="purchase">
+         <!--商品详情-->
+         <div class="goods">
+              <div class="left">
+                   <img src="{$data.img_url}" alt="">
+              </div>
+               <div class="right">
+                    <div class="good_attributes">
+                         <p class="jieshao">
+                              商品名称
+                         </p>
+                         <p class="goods_name">
+                             {$data.name}
+                         </p>
+                    </div>
+                   <div class="good_attributes">
+                       <p class="jieshao">
+                           商品规格
+                       </p>
+                       <p class="goods_guige">
+                           {$data.guige}
+                       </p>
+                   </div>
+                   <div class="good_attributes">
+                       <p class="jieshao">
+                           商品价格
+                       </p>
+                       <p class="goods_shj">
+                           {$data.shj}￥
+                       </p>
+                   </div>
+
+                   <div class="good_attributes">
+                       <p class="jieshao">
+                           购买数量
+                       </p>
+                       <p class="goods_count">
+                           <span class="reduce" onclick="reduce()">-</span> <span class="count">1</span> <span class="add-count" onclick="addCount()">+</span>
+                       </p>
+                   </div>
+
+
+
+                   <div class="good_attributes">
+                       <p class="jieshao">
+                           商品总价
+                       </p>
+                       <p class="goods_shj">
+                           <span class="star" id="total-price">{$data.shj}</span>￥
+                       </p>
+                   </div>
+                    <div class="clear"></div>
+               </div>
+
+              <div class="clear"></div>
+         </div>
+
+
+         <!--用户信息-->
+         <div class="user_profile">
+             <h2>填写收货信息</h2>
+             <div class="add">
+                 <label for="address" class="choose-add text-center"><span class="star">*</span>请选择收货地址</label>
+
+                     <if condition="!empty($addlist)" >
+                        <select name="address" id="address">
+                         <volist name="$addlist" id="vo">
+                             <option value="{$vo.id}">
+                                 {$vo.address}
+                             </option>
+                         </volist>
+                        </select>
+                     <else />
+                         <input type="text" name="address" id="address" value="" style="border: 1px solid #000;box-sizing: border-box;" placeholder="请输入您的收货地址..">
+                     </if>
+
+
+
+             </div>
+                <div class="clear"></div>
+
+             <div class="phone">
+                 <label for="phone" class="for-phone text-center"><span class="star">*</span>收货手机号码</label>
+                 <input type="text" id="phone"  name="phone" value="{$cur_user.mobile}" placeholder="请输入您的收货号码..">
+             </div>
+
+                <div class="clear"></div>
+             <div class="pay-way">
+                 <label  class="for-pay text-center"><span class="star">*</span>支付方式</label>
+                  <input type="radio" name="pay-way" value="1" checked>支付宝
+                  <input type="radio" name="pay-way" value="2">微信
+                  <input type="radio" name="pay-way" value="3">货到付款
+             </div>
+
+
+               <div class="clear"></div>
+             <div class="pay-way">
+                 <label  class="for-pay text-center">配送方式</label>
+                 <input type="radio" name="send-way" value="1" checked>顺丰
+                 <input type="radio" name="send-way" value="2">中通
+                 <input type="radio" name="send-way" value="3">韵达
+                 <span class="star pull-right">不选的情况下,默认是款顺丰</span>
+             </div>
+
+
+             <div class="clear"></div>
+
+             <div class="pay-way">
+                 <label  class="for-pay text-center">备注</label>
+                 <textarea name="bz" placeholder="不要太甜,还是不要太辣?" id="txt-bz" style="width: 86%;height: 50px;box-sizing:border-box;font-size: 18px;text-indent:15px;line-height: 50px;" ></textarea>
+             </div>
+             <div class="clear"></div>
+             <div class="btn">
+                <div class="total">
+                    总价: <span class="star" id="last-total">{$data.shj}</span> <span class="star">￥</span>
+                </div>
+             </div>
+
+                <div class="clear"></div>
+             <button class="ok-btn" onclick="xiaDan()">支付并购买</button>
+             <div class="clear"></div>
+         </div>
+         <div class="clear"></div>
+     </div>
+
+<!--/main-->
+
+<include file="public/footer" />
+<script>
+    //支付并购买
+    function xiaDan()
+    {
+        console.log("{$data.id}");
+       // return;
+        $.ajax
+        ({
+            url:"{:url('shop/index/purchase')}",
+            type:"POST",
+            data:
+            {
+                "address":$('#address').val(),
+                "goods_id":"{$data.id}",
+                "user_id":"{$cur_user.id}",
+                "goods_count":parseInt($(".count").html()),
+                "phone":$("#phone").val(),
+                "pay_way":$("input[name=pay-way]").val(),
+                "send_way":$("input[name=send-way]").val(),
+                "bz":$('#txt-bz').val(),
+            },
+            dataType:"json",
+            success:function(data)
+            {
+                console.log(data);
+                $("#task").show();
+                $("#tips .tips-body").html(data.msg);
+            },
+            error:function(msg)
+            {
+                console.log(msg);
+            }
+        });
+    }
+
+
+
+    function reduce()
+    {
+        var count = parseInt($(".count").html());
+        if(count == 1)
+        {
+            return false;
+        }
+        count--;
+        $(".count").html(count);
+
+        $('#total-price,#last-total').html(count*parseInt("{$data.shj}"));
+    }
+
+    function addCount()
+    {
+        var count = parseInt($(".count").html());
+        count++;
+        $(".count").html(count);
+        $('#total-price,#last-total').html(count*parseInt("{$data.shj}"));
+    }
+
+
+</script>

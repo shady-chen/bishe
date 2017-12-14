@@ -1,0 +1,308 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li
+    {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminGoods/index')}">所有商品类型</a></li>
+        <li class="active"><a href="javascript:'';">添加商品类型</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <form action="{:url('AdminGoods/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="goods_name" class="col-sm-2 control-label">商品名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="goods_name" placeholder="" name="goods_name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="type_id" class="col-sm-2 control-label">商品名称</label>
+                    <div class="col-sm-10">
+                        <select name="type_id" id="type_id">
+                            <volist name="types" id="vo">
+                                <option value="{$vo.id}">{$vo.type}</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="guige" class="col-sm-2 control-label">商品规格</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="guige" placeholder="" name="goods_guige" required  value="500ml">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goods_jhj" class="col-sm-2 control-label">进货价</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="goods_jhj" placeholder="" name="goods_jhj" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goods_shj" class="col-sm-2 control-label">售货价</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="goods_shj" placeholder="" name="goods_shj" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="goods_img_url" class="col-sm-2 control-label">商品封面图片</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="avatar" onchange="PreviewImage(this)" id="goods_img_url">
+                        <div id="imgPreview" >
+                            <img src="" alt="">
+                            <i class=" icon-camera" ></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goods_kucun" class="col-sm-2 control-label">库存</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="goods_kucun" placeholder="" name="goods_kucun" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">是否上架</label>
+                    <div class="col-sm-10">
+                        上架<input type="radio"   value="1" name="goods_is_sell" required checked>
+                        下架<input type="radio"   value="0" name="goods_is_sell" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="content" class="col-sm-2 control-label">描述</label>
+                    <div class="col-sm-10">
+                        <script type="text/plain" id="content" name="description"></script>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="js-ajax-submit btn btn-default pull-right form-control col-sm-10" type="submit">提交</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+
+
+        //发送给指定的用户时触发的事件  start **************************************
+        $("#for-who").bind("change",function()
+        {
+            if($(this).val() == "0")
+            {
+                $("#zdyh").show();
+            }
+            else
+            {
+                $("#zdyh").hide();
+            }
+        });
+        //发送给指定的用户时触发的事件  end **************************************
+
+
+        //输入指定用户时触发的事件  start **************************************
+        $("#search_user").bind("input propertychange",function()
+        {
+            //清除div中的列表
+            $(".user-list").empty();
+            var that = $(this);
+            if(that.val() == "")
+            {
+                $(".user-list").hide();
+                return false;
+            }
+            //输入时触发ajax事件,去数据库查询数据
+            $.ajax
+            ({
+                url:"{:url('user/AdminNotice/queryUser')}",
+                type:"POST",
+                data:{"keywords":that.val()},
+                dataType:"json",
+                success:function(returndata)
+                {
+                    //清除div中的列表
+                    $(".user-list").show();
+                    var htmlElements = '';
+                    $(".user-list").empty();
+                    if(returndata.length < 1)
+                    {
+                        $(".user-list").append("<p class='tips'>没有检索到匹配的用户</p>");
+                    }
+                    else
+                    {
+                        htmlElements = '';
+                        for(var i = 0; i < returndata.length;i++)
+                        {
+                            htmlElements += '<p class="which-one">'+returndata[i]['user_nickname']+'</p>';
+                        }
+
+
+                        if(that.val() == "")
+                        {
+                            $(".user-list").hide();
+                            return false;
+                        }
+
+                        $(".user-list").append(htmlElements);
+
+                        /****给新增的元素添加事件  start*****/
+
+
+                        $(".which-one").on('mousemove',function()
+                        {
+                            $(".which-one").removeClass("bg-primary");
+                            $(this).addClass("bg-primary");
+                        });
+
+                        $(".which-one").on('click',function()
+                        {
+                            $(".user-list").hide();
+                            that.val($(this).html());
+                        });
+                        /****给新增的元素添加事件  end*****/
+                    }
+                },
+                error:function()
+                {
+                    console.log("失败了");
+                },
+            });
+        });
+        //输入指定用户时触发的事件  end **************************************
+
+
+
+
+    }); //end of $(function(){})
+
+
+
+    function PreviewImage(imgFile)
+    {
+        var filextension=imgFile.value.substring(imgFile.value.lastIndexOf("."),imgFile.value.length);
+        filextension=filextension.toLowerCase();
+        if ((filextension!='.jpg')&&(filextension!='.gif')&&(filextension!='.jpeg')&&(filextension!='.png')&&(filextension!='.bmp'))
+        {
+            alert("对不起，系统仅支持标准格式的照片，请您调整格式后重新上传，谢谢 !");
+            imgFile.focus();
+        }
+        else
+        {
+            var path;
+            if(document.all)//IE
+            {
+                imgFile.select();
+                path = document.selection.createRange().text;
+                document.getElementById("imgPreview").innerHTML="";
+                document.getElementById("imgPreview").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果
+            }
+            else//FF
+            {
+                path=window.URL.createObjectURL(imgFile.files[0]);// FF 7.0以上
+                //path = imgFile.files[0].getAsDataURL();// FF 3.0
+                document.getElementById("imgPreview").innerHTML = "<img id='img1'  src='"+path+"'/>";
+                //document.getElementById("img1").src = path;
+            }
+        }
+    }//end of previewImage
+
+
+
+    function uploadOneImage(dialog_title, input_selector, extra_params, app) {
+        openUploadDialog(dialog_title, function (dialog, files) {
+            $(input_selector).val(files[0].filepath);
+            $(input_selector + '-preview').attr('src', files[0].preview_url);
+            $(input_selector + '-name').val(files[0].name);
+        }, extra_params, 0, 'image', app);
+    }
+
+    /**
+     * 多图上传
+     * @param dialog_title 上传对话框标题
+     * @param container_selector 图片容器
+     * @param item_tpl_wrapper_id 单个图片html模板容器id
+     * @param extra_params 额外参数，object
+     * @param app  应用名,CMF 的应用名
+     */
+    function uploadMultiImage(dialog_title, container_selector, item_tpl_wrapper_id, extra_params, app) {
+        openUploadDialog(dialog_title, function (dialog, files) {
+            var tpl  = $('#' + item_tpl_wrapper_id).html();
+            var html = '';
+            $.each(files, function (i, item) {
+                var itemtpl = tpl;
+                itemtpl     = itemtpl.replace(/\{id\}/g, item.id);
+                itemtpl     = itemtpl.replace(/\{url\}/g, item.url);
+                itemtpl     = itemtpl.replace(/\{preview_url\}/g, item.preview_url);
+                itemtpl     = itemtpl.replace(/\{filepath\}/g, item.filepath);
+                itemtpl     = itemtpl.replace(/\{name\}/g, item.name);
+                html += itemtpl;
+            });
+            $(container_selector).append(html);
+
+        }, extra_params, 1, 'image', app);
+    }
+
+    function openUploadDialog(dialog_title, callback, extra_params, multi, filetype, app) {
+        Wind.css('artDialog');
+        multi      = multi ? 1 : 0;
+        filetype   = filetype ? filetype : 'image';
+        app        = app ? app : GV.APP;
+        var params = '&multi=' + multi + '&filetype=' + filetype + '&app=' + app;
+        Wind.use("artDialog", "iframeTools", function () {
+            art.dialog.open(GV.ROOT + 'user/Asset/webuploader?' + params, {
+                title: dialog_title,
+                id: new Date().getTime(),
+                width: '600px',
+                height: '350px',
+                lock: true,
+                fixed: true,
+                background: "#CCCCCC",
+                opacity: 0,
+                ok: function () {
+                    if (typeof callback == 'function') {
+                        var iframewindow = this.iframe.contentWindow;
+                        var files        = iframewindow.get_selected_files();
+                        console.log(files);
+                        if (files && files.length > 0) {
+                            callback.apply(this, [this, files, extra_params]);
+                        } else {
+                            return false;
+                        }
+
+                    }
+                },
+                cancel: true
+            });
+        });
+    }
+
+</script>
+</body>
+</html>

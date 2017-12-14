@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>register</title>
+	<link rel="stylesheet" href="__STATIC__/shop/css/register.css">
+	<script src="__STATIC__/shop/js/ajax3.0-min.js"></script>
+	<script src="__STATIC__/shop/js/jQuery.js"></script>
+
+	<script src="__STATIC__/shop/js/register.js"></script>
+	<include file="public@head"/>
+</head>
+<body>
+	<div class="header">
+		<div class="top">
+			<!-- logo -->
+			<img src="__STATIC__/shop/img/logo.png" alt="">
+			<img src="__STATIC__/shop/img/logo-left.jpg" alt="">
+			<div class="top-right">
+				<span>欢迎来到酒仙网！</span>
+				<span><a href="">免费注册</a></span>
+				<span>帮助中心</span>
+			</div>
+
+		</div>
+	</div>
+	<div class="content">
+		<div class="main">
+		 	<div class="register">
+		 		 <form class="js-ajax-form" action="{:url('shop/Register/doRegister')}" method="post">
+
+                            <div class="form-group">
+                                <input type="text" name="username" placeholder="手机号" class="form-control"
+                                       id="js-mobile-input">
+                            </div>
+
+                            <empty name="is_open_registration">
+                                <div class="form-group">
+                                    <div style="position: relative;">
+                                        <input type="text" name="code" placeholder="手机验证码" style="width:170px;"
+                                               class="form-control">
+                                        <a class="btn btn-success js-get-mobile-code"
+                                           style="width: 163px;position: absolute;top:0;right: 0;"
+                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#js-mobile-input"
+                                           data-url="{:url('user/VerificationCode/send')}"
+                                           data-init-second-left="60">获取手机验证码</a>
+                                    </div>
+                                </div>
+                            </empty>
+
+                            <div class="form-group">
+                                <input type="password" name="password" placeholder="密码" class="form-control">
+                            </div>
+
+                           
+
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-wait="1500"
+                                        style="margin-left: 0px;">确定注册
+                                </button>
+                            </div>
+
+                            <div class="form-group" style="text-align: center;">
+                                <p>
+                                    已有账号? <a href="{:cmf_url('user/Login/index')}">点击此处登录</a>
+                                </p>
+                            </div>
+                        </form>
+		 	</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="footer-main">
+			<p>©  酒仙网  2011 jiuxian.com All  Rights Reserved  京ICP证110141号  京公网安备1101050188221</p>
+			<p>购买前请确认达到法定饮酒年龄！酒仙网不销售任何含酒精产品给18岁以下人士！</p>
+		</div>		
+	</div>
+	<div class="mask">
+		<p>恭喜注册成功</p>
+		<span id="second">5</span>s后自动跳转
+	</div>
+	<include file="public@scripts"/>
+</body>
+</html>

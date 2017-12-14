@@ -1,0 +1,35 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">所有商品类型</a></li>
+        <li><a href="{:url('AdminGoodsType/add')}">添加商品类型</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped text-center">
+                <tr class="text-center">
+                    <td>ID</td>
+                    <td>类型</td>
+                    <td>发布时间</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="lst" item="vo">
+                    <tr class="text-center">
+                        <td>{$vo.id}</td>
+                        <td>{$vo.type}</td>
+                        <td>{:date("Y-m-d H:s:i",$vo.create_time)}</td>
+                        <td>
+                            <a href="{:url('AdminGoodsType/edit',['type_id'=>$vo.id])}"  class="btn btn-primary">编辑</a>
+                            <a href="{:url('AdminGoodsType/delete',['type_id'=>$vo.id])}" class="btn btn-danger">删除</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
