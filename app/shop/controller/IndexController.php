@@ -3,6 +3,7 @@
 namespace app\shop\controller;
 
 use app\shop\model\AddressModel;
+use app\shop\model\CollectionModel;
 use app\shop\model\GoodsModel;
 use app\shop\model\Order2Model;
 use app\shop\model\ShoppingCartModel;
@@ -96,7 +97,7 @@ class IndexController extends HomeBaseController
             $param = $request->param();
 
             // 判断是否从购物车提交上来的数据,是的话要删除购物车中的数据;
-            if($param['origin'] == 'gouwuche')
+            if(isset($param['origin']) && $param['origin'] == 'gouwuche' )
             {
                 $this->removeCart($param['goods_id'],cmf_get_current_user_id());
             }
@@ -233,6 +234,59 @@ class IndexController extends HomeBaseController
         $count--;
         session('shuliang',$count);
     }
+
+
+    public function usercenter()
+    {
+        $user_id = cmf_get_current_user_id();
+        if(!$user_id)
+        {
+            $this->redirect('shop/login/index');
+        }
+        else
+        {
+            $user = UserModel::get($user_id)->toArray();
+            $this->assign('user',$user);
+            return $this->fetch();
+        }
+
+    }
+
+    /**
+     * 收藏goods
+     */
+    public function colGoods()
+    {
+        $user_id = cmf_get_current_user_id();
+
+        $shoppongCartModel = new CollectionModel();
+
+        $param = $this->request->param();
+        $data = [];
+        $data['goods_id']  = $param['goods_id'];
+        $data['user_id']  = $user_id;
+
+        $res = $shoppongCartModel->get(['goods_id'=>$data['goods_id'],'user_id'=>$user_id]);
+        if($res)
+        {
+            return $this->error('您已将这个商品加入收藏');
+        }
+        $result = $shoppongCartModel->save($data);
+        if(!$result)
+        {
+            return $this->error('收藏失败');
+        }
+        return $this->success('收藏成功');
+    }
+
+
+
+
+
+
+
+
+
 
     /**
      * 退出登录

@@ -1,5 +1,198 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:40:"themes/simpleboot3/shop\index\index.html";i:1513605956;s:42:"themes/simpleboot3/shop\public\header.html";i:1513863841;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;}*/ ?>
 
-<include file="/public/header"    />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>酒仙网</title>
+    <link rel="shortcut icon " href="__STATIC__/shop/img/favicon.ico">
+    <link rel="stylesheet" href="__STATIC__/shop/css/index.css">
+    <script src="__STATIC__/shop/js/jQuery.js"></script>
+    <script src="__STATIC__/shop/js/myAutoplay.js"></script>
+    <link rel="stylesheet" href="__STATIC__/shop/css/xiangqing.css">
+    
+<?php 
+/*可以加多个方法哟！*/
+function _sp_helloworld(){
+	echo "hello ThinkCMF!";
+}
+
+function _sp_helloworld2(){
+	echo "hello ThinkCMF2!";
+}
+
+
+function _sp_helloworld3(){
+	echo "hello ThinkCMF3!";
+}
+
+ ?>
+<meta name="author" content="ThinkCMF">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- Set render engine for 360 browser -->
+<meta name="renderer" content="webkit">
+
+<!-- No Baidu Siteapp-->
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+<!-- HTML5 shim for IE8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<![endif]-->
+<link rel="icon" href="__TMPL__/public/assets/images/favicon.png" type="image/png">
+<link rel="shortcut icon" href="__TMPL__/public/assets/images/favicon.png" type="image/png">
+<link href="__TMPL__/public/assets/simpleboot3/themes/simpleboot3/bootstrap.min.css" rel="stylesheet">
+<link href="__TMPL__/public/assets/simpleboot3/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
+      type="text/css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="__TMPL__/public/assets/simpleboot3/font-awesome/4.4.0/css/font-awesome-ie7.min.css">
+<![endif]-->
+<!-- <link href="__TMPL__/public/assets/css/style.css" rel="stylesheet"> -->
+<style>
+    /*html{filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(1);}*/
+    #backtotop {
+        position: fixed;
+        bottom: 50px;
+        right: 20px;
+        display: none;
+        cursor: pointer;
+        font-size: 50px;
+        z-index: 9999;
+    }
+
+    #backtotop:hover {
+        color: #333
+    }
+
+    #main-menu-user li.user {
+        display: none
+    }
+</style>
+<script type="text/javascript">
+    //全局变量
+    var GV = {
+        ROOT: "__ROOT__/",
+        WEB_ROOT: "__WEB_ROOT__/",
+        JS_ROOT: "static/js/"
+    };
+</script>
+<script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
+<script src="__TMPL__/public/assets/js/jquery-migrate-1.2.1.js"></script>
+<script src="__STATIC__/js/wind.js"></script>
+	
+</head>
+<?php 
+    $cur_user = session('user');
+    $shuliang = session('shuliang')
+ ?>
+<body>
+<!-- 最上面 -->
+<div class="header-wrap">
+    <div id="header">
+        <div class="pull-left">
+            <ul class="list-unstyled">
+                <li class=" pull-left">欢迎来酒仙网！</li>
+                <?php if($cur_user): ?>
+                    <li class=" pull-left"><a href=""><?php echo $cur_user['mobile']; ?>,你好！</a></li>
+                    <li class=" pull-left"><a href="<?php echo url('shop/index/logout'); ?>" class="text-danger">退出登录</a></li>
+                    <?php else: ?>
+                    <li class=" pull-left"><a href="<?php echo url('shop/login/index'); ?>">请登录</a></li>
+                    <li class=" pull-left"><a href="<?php echo url('shop/register/index'); ?>">免费注册</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+        <div class="pull-right">
+            <ul class="list-unstyled">
+                <li class=" pull-left header-hover">
+                    <a href="">网站导航</a>
+                    <div class="header-hover-hide header-hover-hide-sp">
+                        <table width="170" cellspacing="0">
+                            <th>购物</th>
+                            <tr>
+                                <td><a href="">白酒</a></td>
+                                <td><a href="">葡萄酒</a></td>
+                                <td><a href="">洋酒</a></td>
+                            </tr>
+                            <tr >
+                                <td><a href="">啤酒</a></td>
+                                <td><a href="">保健酒</a></td>
+                                <td><a href="">黄酒</a></td>
+                            </tr>
+                        </table>
+                        <table width="170">
+                            <th>活动</th>
+                            <tr>
+                                <td><a href="">进口馆</a></td>
+                                <td><a href="">整箱套装</a></td>
+                                <td><a href="">清仓</a></td>
+                            </tr>
+                            <tr >
+                                <td><a href="">闪团</a></td>
+                                <td><a href="">新品</a></td>
+                                <td><a href="">发现</a></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </li>
+
+                <li class=" pull-left header-hover" id="chen">
+                    <a href="/shop/user_center/index">我的酒仙</a>
+                    <div class="header-hover-hide">
+                        <p><a href="">我的订单</a></p>
+                        <p><a href="">我的优惠券</a></p>
+                    </div>
+                </li>
+                <li class=" pull-left"><a href="<?php echo url('shop/index/gouwuche'); ?>">购物车<span><?php echo $shuliang>0?$shuliang:"0"; ?></span>件</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 最上面结束 -->
+<div class="clear"></div>
+<!-- 第二层 -->
+<div id="guanggao">
+    <a href="http://www.google.com" class="guanggao"></a>
+</div>
+<!-- 第二层结束 -->
+<div class="clear"></div>
+<!-- search开始-->
+<div class="search-wrap">
+    <div class="search ct">
+        <div class="pull-left logo">
+            <a href=""><img src="__STATIC__/shop/img/logo.png" alt=""></a>
+            <a href=""><img src="__STATIC__/shop/img/search1.gif" alt=""></a>
+        </div>
+        <div class="search-input pull-left">
+            <div class="input">
+                <input type="text">
+                <button type="submit">提 交</button>
+            </div>
+            <div class="input-2">
+                <ul>
+                    <li><a href="">品质红酒节 </a></li>
+                    <li><a href="">结婚季</a></li>
+                    <li><a href="">五粮液</a></li>
+                    <li><a href="">剑南春</a></li>
+                    <li><a href="">汾酒</a></li>
+                    <li><a href="">酒鬼酒</a></li>
+                    <li><a href="">古井贡</a></li>
+                    <li><a href="">拉菲</a></li>
+                    <li><a href="" style="color: #c00;">茉莉花</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pull-right pic">
+            <img src="__STATIC__/shop/img/xuebitu.png" alt="">
+        </div>
+    </div>
+</div>
+<!-- search结束-->
+
+<div class="clear"></div>
 <script src="__STATIC__/shop/js/header.js"></script>
 	<!-- 轮播图 -->
 	<div class="autoplay">
@@ -39,13 +232,13 @@
 						白酒
 						<div class="qg-left-hide" style="display: block;">
 							<ol>
-								<volist name="baijiu" id="vo">
-								<li onclick="window.location.href='{:url('shop/index/details',['id'=>$vo.id])}'">
-									<a href="{:url('shop/index/details',['id'=>$vo.id])}"><img src="{$vo.img_url}" alt="" style="width: 80%;"></a>
-									<p><a href="">{$vo.name}</a></p>
-									<span>￥{$vo.shj}.00</span>
+								<?php if(is_array($baijiu) || $baijiu instanceof \think\Collection || $baijiu instanceof \think\Paginator): $i = 0; $__LIST__ = $baijiu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+								<li onclick="window.location.href='<?php echo url('shop/index/details',['id'=>$vo['id']]); ?>'">
+									<a href="<?php echo url('shop/index/details',['id'=>$vo['id']]); ?>"><img src="<?php echo $vo['img_url']; ?>" alt="" style="width: 80%;"></a>
+									<p><a href=""><?php echo $vo['name']; ?></a></p>
+									<span>￥<?php echo $vo['shj']; ?>.00</span>
 								</li>
-								</volist>
+								<?php endforeach; endif; else: echo "" ;endif; ?>
 							</ol>
 						</div>
 					</li>

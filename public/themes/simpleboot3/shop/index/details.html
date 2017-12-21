@@ -44,6 +44,7 @@
 
 				<input type="hidden" value="{:cmf_get_current_user_id()}" name="user_id" id="user_id">
 				<input type="hidden" value="{$data.id}" name="goods_id" id="good_id">
+				<p style="cursor: pointer;background: #c9a53d;" onclick="collect()" class="cart-btn buy-now">收藏</p>
 				<p style="cursor: pointer;" onclick="addGodds()" class="cart-btn">加入购物车</p>
 				<p style="cursor: pointer;" onclick="xiaDan()" class="cart-btn buy-now">立即购买</p>
 			</div>
@@ -70,6 +71,7 @@
 	</div>
 
 	<!-- 商品详情结束 -->
+<include file="public/task" />
 <include file="public/footer" />
 <script>
 	//加入购物车
@@ -103,5 +105,26 @@
 	    window.location.href = "{:url('shop/index/buy',['id'=>$data.id])}";
 	    return false;
 
+	}
+
+	function collect()
+	{
+        $.ajax
+        ({
+            url:"{:url('shop/index/colGoods')}",
+            type:"POST",
+            data:{"goods_id":$("#good_id").val()},
+            dataType:"json",
+            success:function(data)
+            {
+                console.log(data);
+                $("#task").show();
+                $("#tips .tips-body").html(data.msg);
+            },
+            error:function(msg)
+            {
+                console.log(msg);
+            }
+        });
 	}
 </script>
