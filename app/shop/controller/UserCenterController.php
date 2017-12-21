@@ -97,7 +97,30 @@ class UserCenterController extends HomeBaseController
 
     public function address()
     {
+        $user_id = cmf_get_current_user_id();
+        $addressModel = new AddressModel();
+        $data = $addressModel->all(['user_id'=>$user_id]);
+        $this->assign('data',$data);
         return $this->fetch();
+    }
+
+    public function addressEdit()
+    {
+        $user_id = cmf_get_current_user_id();
+        $addressModel = new AddressModel();
+        $address = $this->request->post('address');
+        $data = [];
+        $data['user_id'] = $user_id;
+        $data['address'] = $address;
+        if($addressModel->save($data))
+        {
+            return $this->success("添加成功");
+        }
+        else
+        {
+            return $this->success("添加失败");
+        }
+
     }
 
 }

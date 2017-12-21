@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:49:"themes/simpleboot3/shop\user_center\my_order.html";i:1513870724;s:42:"themes/simpleboot3/shop\public\header.html";i:1513863841;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:38:"themes/simpleboot3/public\scripts.html";i:1513602023;s:40:"themes/simpleboot3/shop\public\task.html";i:1513602023;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:49:"themes/simpleboot3/shop\user_center\my_order.html";i:1513871870;s:42:"themes/simpleboot3/shop\public\header.html";i:1513863841;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:38:"themes/simpleboot3/public\scripts.html";i:1513602023;s:40:"themes/simpleboot3/shop\public\task.html";i:1513602023;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -261,7 +261,7 @@ function _sp_helloworld3(){
 			   <a href="" class="active">我的订单</a>
 			</li>
 			<li>
-				<a href="">收货地址</a>
+				<a href="/shop/user_center/address">收货地址</a>
 			</li>
 			<li>
 				<a href="">网站留言</a>

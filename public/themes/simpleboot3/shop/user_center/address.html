@@ -52,51 +52,46 @@
 	{
 		width: 100%;
 		height: 100%;
+		padding-top: 20px;
 	}
-	.form-input
+	form>p
 	{
-		width: 600px;
-		height: 80px;
-		margin:0 auto;
-		font-size: 16px;
-	}
-	.form-input>.protot
-	{
-		width: 20%;
-		height: 100%;
-		line-height: 80px;
-		display: block;
-		font-size: 16px;
-		float: left;
 		text-align: center;
+		font-size: 18px;
 	}
-	.form-input>input
+	form>input
 	{
-		width: 68%;
-		height: 40px;
-		display: block;
-		font-size: 16px;
-		float: left;
-		border: 1px solid #000;
-		margin-top: 19px;
+		width: 50%;
+		height: 50px;
 		text-indent: 5px;
+		font-size: 16px;
+		display: block;
+		margin:0 auto;
+        margin-top: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
 	}
-	.form-input>button
+	form>button
 	{
-		
 		width: 100px;
 		height: 40px;
-		
 		display: block;
 		margin:0 auto;
+        font-size: 18px;
+        border-radius: 5px;
+        background: #51b1ff;
+        color: #fff;
+        margin-top: 15px;
 	}
+
+
 </style>
 
 <div id="content">
 	
 		<ul id='left-nav'>
 			<li>
-			   <a href="" class="active">个人资料</a>
+			   <a href="/shop/user_center/index" >个人资料</a>
 			</li>
 			<li>
 				<a href="/shop/user_center/collection">收藏夹</a>
@@ -105,7 +100,7 @@
 			   <a href="/shop/user_center/my_order">我的订单</a>
 			</li>
 			<li>
-				<a href="">收货地址</a>
+				<a href="" class="active">收货地址</a>
 			</li>
 			<li>
 				<a href="">网站留言</a>
@@ -113,27 +108,13 @@
 		</ul>
 		
 		<div id="right-profile">
-			<form action="/shop/user_center/editPost" method="POST" class="js-ajax-form">
-				<div class="form-input">
-					<span class="protot">用户名</span>
-					<input type="text" name="user_nickname" value="{$cur_user.user_nickname}"  placeholder="请输入用户名">
-					<div class="clear"></div>
-				</div>
+			<form action="/shop/user_center/addressEdit" method="POST" class="js-ajax-form">
+				<volist name="data" id="vo">
+					<p>编号:{$i} 地址：{$vo.address} <a href="">删除</a></p>
+				</volist>
 
-				<div class="form-input">
-					<span class="protot">邮箱</span>
-					<input type="text" name="user_email" value="{$cur_user.user_email}"  placeholder="请输入邮箱">
-					<div class="clear"></div>
-				</div>
-
-				<div class="form-input">
-					<span class="protot">手机</span>
-					<input type="text" name="mobile" value="{$cur_user.mobile}"  placeholder="请输入手机">
-					<div class="clear"></div>
-				</div>
-				<div class="form-input">
-					<button class="js-ajax-submit" type="submit">提交</button>
-				</div>
+				<input type="text" placeholder="请输入地址...." name="address" required>
+                <button  class="js-ajax-submit" type="submit">新增</button>
 			</form>
 		</div>
 

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:46:"themes/simpleboot3/shop\user_center\index.html";i:1513871870;s:42:"themes/simpleboot3/shop\public\header.html";i:1513863841;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:38:"themes/simpleboot3/public\scripts.html";i:1513602023;s:40:"themes/simpleboot3/shop\public\task.html";i:1513602023;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:48:"themes/simpleboot3/shop\user_center\address.html";i:1513873244;s:42:"themes/simpleboot3/shop\public\header.html";i:1513863841;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:38:"themes/simpleboot3/public\scripts.html";i:1513602023;s:40:"themes/simpleboot3/shop\public\task.html";i:1513602023;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -245,51 +245,46 @@ function _sp_helloworld3(){
 	{
 		width: 100%;
 		height: 100%;
+		padding-top: 20px;
 	}
-	.form-input
+	form>p
 	{
-		width: 600px;
-		height: 80px;
-		margin:0 auto;
-		font-size: 16px;
-	}
-	.form-input>.protot
-	{
-		width: 20%;
-		height: 100%;
-		line-height: 80px;
-		display: block;
-		font-size: 16px;
-		float: left;
 		text-align: center;
+		font-size: 18px;
 	}
-	.form-input>input
+	form>input
 	{
-		width: 68%;
-		height: 40px;
-		display: block;
-		font-size: 16px;
-		float: left;
-		border: 1px solid #000;
-		margin-top: 19px;
+		width: 50%;
+		height: 50px;
 		text-indent: 5px;
+		font-size: 16px;
+		display: block;
+		margin:0 auto;
+        margin-top: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
 	}
-	.form-input>button
+	form>button
 	{
-		
 		width: 100px;
 		height: 40px;
-		
 		display: block;
 		margin:0 auto;
+        font-size: 18px;
+        border-radius: 5px;
+        background: #51b1ff;
+        color: #fff;
+        margin-top: 15px;
 	}
+
+
 </style>
 
 <div id="content">
 	
 		<ul id='left-nav'>
 			<li>
-			   <a href="" class="active">个人资料</a>
+			   <a href="/shop/user_center/index" >个人资料</a>
 			</li>
 			<li>
 				<a href="/shop/user_center/collection">收藏夹</a>
@@ -298,7 +293,7 @@ function _sp_helloworld3(){
 			   <a href="/shop/user_center/my_order">我的订单</a>
 			</li>
 			<li>
-				<a href="/shop/user_center/address">收货地址</a>
+				<a href="" class="active">收货地址</a>
 			</li>
 			<li>
 				<a href="">网站留言</a>
@@ -306,27 +301,13 @@ function _sp_helloworld3(){
 		</ul>
 		
 		<div id="right-profile">
-			<form action="/shop/user_center/editPost" method="POST" class="js-ajax-form">
-				<div class="form-input">
-					<span class="protot">用户名</span>
-					<input type="text" name="user_nickname" value="<?php echo $cur_user['user_nickname']; ?>"  placeholder="请输入用户名">
-					<div class="clear"></div>
-				</div>
+			<form action="/shop/user_center/addressEdit" method="POST" class="js-ajax-form">
+				<?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+					<p>编号:<?php echo $i; ?> 地址：<?php echo $vo['address']; ?> <a href="">删除</a></p>
+				<?php endforeach; endif; else: echo "" ;endif; ?>
 
-				<div class="form-input">
-					<span class="protot">邮箱</span>
-					<input type="text" name="user_email" value="<?php echo $cur_user['user_email']; ?>"  placeholder="请输入邮箱">
-					<div class="clear"></div>
-				</div>
-
-				<div class="form-input">
-					<span class="protot">手机</span>
-					<input type="text" name="mobile" value="<?php echo $cur_user['mobile']; ?>"  placeholder="请输入手机">
-					<div class="clear"></div>
-				</div>
-				<div class="form-input">
-					<button class="js-ajax-submit" type="submit">提交</button>
-				</div>
+				<input type="text" placeholder="请输入地址...." name="address" required>
+                <button  class="js-ajax-submit" type="submit">新增</button>
 			</form>
 		</div>
 
