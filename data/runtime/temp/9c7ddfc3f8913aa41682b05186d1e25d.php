@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:38:"themes/simpleboot3/shop\index\buy.html";i:1513602023;s:42:"themes/simpleboot3/shop\public\header.html";i:1513863841;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:38:"themes/simpleboot3/shop\index\buy.html";i:1513959344;s:42:"themes/simpleboot3/shop\public\header.html";i:1513956969;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,80 +9,7 @@
     <script src="__STATIC__/shop/js/jQuery.js"></script>
     <script src="__STATIC__/shop/js/myAutoplay.js"></script>
     <link rel="stylesheet" href="__STATIC__/shop/css/xiangqing.css">
-    
-<?php 
-/*可以加多个方法哟！*/
-function _sp_helloworld(){
-	echo "hello ThinkCMF!";
-}
 
-function _sp_helloworld2(){
-	echo "hello ThinkCMF2!";
-}
-
-
-function _sp_helloworld3(){
-	echo "hello ThinkCMF3!";
-}
-
- ?>
-<meta name="author" content="ThinkCMF">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-<!-- Set render engine for 360 browser -->
-<meta name="renderer" content="webkit">
-
-<!-- No Baidu Siteapp-->
-<meta http-equiv="Cache-Control" content="no-siteapp"/>
-
-<!-- HTML5 shim for IE8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<![endif]-->
-<link rel="icon" href="__TMPL__/public/assets/images/favicon.png" type="image/png">
-<link rel="shortcut icon" href="__TMPL__/public/assets/images/favicon.png" type="image/png">
-<link href="__TMPL__/public/assets/simpleboot3/themes/simpleboot3/bootstrap.min.css" rel="stylesheet">
-<link href="__TMPL__/public/assets/simpleboot3/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
-      type="text/css">
-<!--[if IE 7]>
-<link rel="stylesheet" href="__TMPL__/public/assets/simpleboot3/font-awesome/4.4.0/css/font-awesome-ie7.min.css">
-<![endif]-->
-<!-- <link href="__TMPL__/public/assets/css/style.css" rel="stylesheet"> -->
-<style>
-    /*html{filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(1);}*/
-    #backtotop {
-        position: fixed;
-        bottom: 50px;
-        right: 20px;
-        display: none;
-        cursor: pointer;
-        font-size: 50px;
-        z-index: 9999;
-    }
-
-    #backtotop:hover {
-        color: #333
-    }
-
-    #main-menu-user li.user {
-        display: none
-    }
-</style>
-<script type="text/javascript">
-    //全局变量
-    var GV = {
-        ROOT: "__ROOT__/",
-        WEB_ROOT: "__WEB_ROOT__/",
-        JS_ROOT: "static/js/"
-    };
-</script>
-<script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
-<script src="__TMPL__/public/assets/js/jquery-migrate-1.2.1.js"></script>
-<script src="__STATIC__/js/wind.js"></script>
-	
-</head>
 <?php 
     $cur_user = session('user');
     $shuliang = session('shuliang')
@@ -193,6 +120,9 @@ function _sp_helloworld3(){
 
 <div class="clear"></div>
 <style>
+    body{
+        background: none;
+    }
      #purchase
      {
           width:1200px;
@@ -208,7 +138,14 @@ function _sp_helloworld3(){
      {
           height:200px;
           width:100%;
-          background: #e2e2e2;
+          /*background: #e2e2e2;*/
+         border: 1px solid gray;
+         -webkit-border-radius: 8px;
+         -moz-border-radius: 8px;
+         border-radius: 8px;
+         box-sizing: border-box;
+         padding: 2px;
+         background: rgb(200,67,101);
      }
      .goods>.left
      {
@@ -223,11 +160,20 @@ function _sp_helloworld3(){
           height:100%;
           
      }
+
+     #total-price
+     {
+         font-size: 18px;
+         color: #000;
+     }
      .goods>.left img
      {
           width:100%;
           height:100%;
           float: left;
+         -webkit-border-radius: 8px;
+         -moz-border-radius: 8px;
+         border-radius: 8px;
      }
      .good_attributes
      {
@@ -240,14 +186,14 @@ function _sp_helloworld3(){
          text-align:center;
           height:50%;
           line-height:100px;
-          color: #000;
-         font-size:24px;
+          color: #fff;
+         font-size:18px;
      }
     .goods_name,.goods_guige,.goods_shj,.goods_count
     {
-        font-size:26px;
+        font-size:18px;
         text-align: center;
-        color: #330066;
+        color: #000;
         line-height:28px;
     }
      .goods_name{
@@ -260,7 +206,7 @@ function _sp_helloworld3(){
      }
      .goods_shj
      {
-         color: #ff5a4d;
+         color: #000;
      }
      .user_profile
      {
@@ -275,16 +221,8 @@ function _sp_helloworld3(){
          height:50px;
          margin:15px 0;
          line-height:50px;
+         text-align: center;
      }
-    .choose-add
-    {
-        font-size:18px;
-        width:13%;
-        float: left;
-        height:50px;
-        line-height:50px;
-        background: #a8a8a8;
-    }
     #address
     {
         width:87%;
@@ -292,29 +230,48 @@ function _sp_helloworld3(){
         font-size:18px;
         float: left;
         text-indent:10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        outline: none;
 
     }
     .phone{
         height:50px;
         line-height:50px;
         margin-top:25px;
+
+
     }
-    .for-phone
+    .for-phone,.choose-add,.for-pay
     {
         float: left;
         width:13%;
-        background: #a8a8a8;
         font-size:18px;
+        height: 50px;
+        line-height: 50px;
+        background: #eee;
+        color: #555;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+
     }
-    #phone{
-        border:1px solid rgb(169, 169, 169);
+    #phone,#txt-bz
+    {
         width:87%;
         height:50px;
         font-size:18px;
         float: left;
-        box-sizing:border-box;
         font-weight:700;
         text-indent:10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        outline: none;
 
     }
     .star
@@ -332,19 +289,12 @@ function _sp_helloworld3(){
         height:50px;
         line-height:50px;
         margin-top:25px;
-        font-size:18px;
-    }
-    .for-pay
-    {
-        float: left;
-        width:13%;
-        background: #a8a8a8;
-        font-size:18px;
+        font-size:16px;
     }
     input[name=pay-way],input[name=send-way]
     {
-        height:30px;
-        width:30px;
+        height:15px;
+        width:15px;
         margin-left:15px;
     }
     .btn{
@@ -355,7 +305,7 @@ function _sp_helloworld3(){
     .total
     {
         float:right;
-        font-size:18px;
+        font-size:20px;
     }
     .ok-btn
     {
@@ -378,6 +328,12 @@ function _sp_helloworld3(){
         background: gray;
         cursor: pointer;
         -webkit-user-select: none;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        background: #ff5814;
+        font-size: 16px;
+        color: #fff;
     }
     .count
     {
@@ -388,6 +344,17 @@ function _sp_helloworld3(){
         font-size:16px;
         display: inline-block;
         -webkit-user-select: none;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        background: #ff5a4d;
+        color: #fff;
+    }
+    .checkbox-div
+    {
+        float: left;
+        font-size: 16px;
+        position: relative;
     }
 </style>
 <!--main-->
@@ -439,7 +406,7 @@ function _sp_helloworld3(){
                            商品总价
                        </p>
                        <p class="goods_shj">
-                           <span class="star" id="total-price"><?php echo $data['shj']; ?></span>￥
+                           <span  id="total-price"><?php echo $data['shj']; ?></span>￥
                        </p>
                    </div>
                     <div class="clear"></div>
@@ -453,7 +420,7 @@ function _sp_helloworld3(){
          <div class="user_profile">
              <h2>填写收货信息</h2>
              <div class="add">
-                 <label for="address" class="choose-add text-center"><span class="star">*</span>请选择收货地址</label>
+                 <label for="address" class="choose-add text-center"><span class="star">*</span>选择收货地址</label>
 
                      <?php if(!empty($addlist)): ?>
                         <select name="address" id="address">
@@ -480,9 +447,17 @@ function _sp_helloworld3(){
                 <div class="clear"></div>
              <div class="pay-way">
                  <label  class="for-pay text-center"><span class="star">*</span>支付方式</label>
-                  <input type="radio" name="pay-way" value="1" checked>支付宝
-                  <input type="radio" name="pay-way" value="2">微信
-                  <input type="radio" name="pay-way" value="3">货到付款
+                 <div class="checkbox-div">
+                     <input type="radio" name="pay-way" value="1" checked>支付宝
+                 </div>
+                 <div class="checkbox-div">
+                     <input type="radio" name="pay-way" value="2">微信
+                  </div>
+                 <div class="checkbox-div">
+                     <input type="radio" name="pay-way" value="3">货到付款
+                 </div>
+
+
              </div>
 
 
@@ -492,7 +467,6 @@ function _sp_helloworld3(){
                  <input type="radio" name="send-way" value="1" checked>顺丰
                  <input type="radio" name="send-way" value="2">中通
                  <input type="radio" name="send-way" value="3">韵达
-                 <span class="star pull-right">不选的情况下,默认是款顺丰</span>
              </div>
 
 
@@ -500,12 +474,12 @@ function _sp_helloworld3(){
 
              <div class="pay-way">
                  <label  class="for-pay text-center">备注</label>
-                 <textarea name="bz" placeholder="不要太甜,还是不要太辣?" id="txt-bz" style="width: 86%;height: 50px;box-sizing:border-box;font-size: 18px;text-indent:15px;line-height: 50px;" ></textarea>
+                 <input name="bz" placeholder="请输入您的备注....." id="txt-bz" />
              </div>
              <div class="clear"></div>
              <div class="btn">
                 <div class="total">
-                    总价: <span class="star" id="last-total"><?php echo $data['shj']; ?></span> <span class="star">￥</span>
+                    总价: <span class="star"  id="last-total"><?php echo $data['shj']; ?></span> <span class="star">￥</span>
                 </div>
              </div>
 

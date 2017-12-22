@@ -1,5 +1,8 @@
 <include file="/public/header"  />
 <style>
+    body{
+        background: none;
+    }
      #purchase
      {
           width:1200px;
@@ -15,7 +18,14 @@
      {
           height:200px;
           width:100%;
-          background: #e2e2e2;
+          /*background: #e2e2e2;*/
+         border: 1px solid gray;
+         -webkit-border-radius: 8px;
+         -moz-border-radius: 8px;
+         border-radius: 8px;
+         box-sizing: border-box;
+         padding: 2px;
+         background: rgb(200,67,101);
      }
      .goods>.left
      {
@@ -30,11 +40,20 @@
           height:100%;
           
      }
+
+     #total-price
+     {
+         font-size: 18px;
+         color: #000;
+     }
      .goods>.left img
      {
           width:100%;
           height:100%;
           float: left;
+         -webkit-border-radius: 8px;
+         -moz-border-radius: 8px;
+         border-radius: 8px;
      }
      .good_attributes
      {
@@ -47,14 +66,14 @@
          text-align:center;
           height:50%;
           line-height:100px;
-          color: #000;
-         font-size:24px;
+          color: #fff;
+         font-size:18px;
      }
     .goods_name,.goods_guige,.goods_shj,.goods_count
     {
-        font-size:26px;
+        font-size:18px;
         text-align: center;
-        color: #330066;
+        color: #000;
         line-height:28px;
     }
      .goods_name{
@@ -67,7 +86,7 @@
      }
      .goods_shj
      {
-         color: #ff5a4d;
+         color: #000;
      }
      .user_profile
      {
@@ -82,16 +101,8 @@
          height:50px;
          margin:15px 0;
          line-height:50px;
+         text-align: center;
      }
-    .choose-add
-    {
-        font-size:18px;
-        width:13%;
-        float: left;
-        height:50px;
-        line-height:50px;
-        background: #a8a8a8;
-    }
     #address
     {
         width:87%;
@@ -99,29 +110,48 @@
         font-size:18px;
         float: left;
         text-indent:10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        outline: none;
 
     }
     .phone{
         height:50px;
         line-height:50px;
         margin-top:25px;
+
+
     }
-    .for-phone
+    .for-phone,.choose-add,.for-pay
     {
         float: left;
         width:13%;
-        background: #a8a8a8;
         font-size:18px;
+        height: 50px;
+        line-height: 50px;
+        background: #eee;
+        color: #555;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+
     }
-    #phone{
-        border:1px solid rgb(169, 169, 169);
+    #phone,#txt-bz
+    {
         width:87%;
         height:50px;
         font-size:18px;
         float: left;
-        box-sizing:border-box;
         font-weight:700;
         text-indent:10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        outline: none;
 
     }
     .star
@@ -139,19 +169,12 @@
         height:50px;
         line-height:50px;
         margin-top:25px;
-        font-size:18px;
-    }
-    .for-pay
-    {
-        float: left;
-        width:13%;
-        background: #a8a8a8;
-        font-size:18px;
+        font-size:16px;
     }
     input[name=pay-way],input[name=send-way]
     {
-        height:30px;
-        width:30px;
+        height:15px;
+        width:15px;
         margin-left:15px;
     }
     .btn{
@@ -162,7 +185,7 @@
     .total
     {
         float:right;
-        font-size:18px;
+        font-size:20px;
     }
     .ok-btn
     {
@@ -185,6 +208,12 @@
         background: gray;
         cursor: pointer;
         -webkit-user-select: none;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        background: #ff5814;
+        font-size: 16px;
+        color: #fff;
     }
     .count
     {
@@ -195,6 +224,17 @@
         font-size:16px;
         display: inline-block;
         -webkit-user-select: none;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        background: #ff5a4d;
+        color: #fff;
+    }
+    .checkbox-div
+    {
+        float: left;
+        font-size: 16px;
+        position: relative;
     }
 </style>
 <!--main-->
@@ -246,7 +286,7 @@
                            商品总价
                        </p>
                        <p class="goods_shj">
-                           <span class="star" id="total-price">{$data.shj}</span>￥
+                           <span  id="total-price">{$data.shj}</span>￥
                        </p>
                    </div>
                     <div class="clear"></div>
@@ -260,7 +300,7 @@
          <div class="user_profile">
              <h2>填写收货信息</h2>
              <div class="add">
-                 <label for="address" class="choose-add text-center"><span class="star">*</span>请选择收货地址</label>
+                 <label for="address" class="choose-add text-center"><span class="star">*</span>选择收货地址</label>
 
                      <if condition="!empty($addlist)" >
                         <select name="address" id="address">
@@ -287,9 +327,17 @@
                 <div class="clear"></div>
              <div class="pay-way">
                  <label  class="for-pay text-center"><span class="star">*</span>支付方式</label>
-                  <input type="radio" name="pay-way" value="1" checked>支付宝
-                  <input type="radio" name="pay-way" value="2">微信
-                  <input type="radio" name="pay-way" value="3">货到付款
+                 <div class="checkbox-div">
+                     <input type="radio" name="pay-way" value="1" checked>支付宝
+                 </div>
+                 <div class="checkbox-div">
+                     <input type="radio" name="pay-way" value="2">微信
+                  </div>
+                 <div class="checkbox-div">
+                     <input type="radio" name="pay-way" value="3">货到付款
+                 </div>
+
+
              </div>
 
 
@@ -299,7 +347,6 @@
                  <input type="radio" name="send-way" value="1" checked>顺丰
                  <input type="radio" name="send-way" value="2">中通
                  <input type="radio" name="send-way" value="3">韵达
-                 <span class="star pull-right">不选的情况下,默认是款顺丰</span>
              </div>
 
 
@@ -307,12 +354,12 @@
 
              <div class="pay-way">
                  <label  class="for-pay text-center">备注</label>
-                 <textarea name="bz" placeholder="不要太甜,还是不要太辣?" id="txt-bz" style="width: 86%;height: 50px;box-sizing:border-box;font-size: 18px;text-indent:15px;line-height: 50px;" ></textarea>
+                 <input name="bz" placeholder="请输入您的备注....." id="txt-bz" />
              </div>
              <div class="clear"></div>
              <div class="btn">
                 <div class="total">
-                    总价: <span class="star" id="last-total">{$data.shj}</span> <span class="star">￥</span>
+                    总价: <span class="star"  id="last-total">{$data.shj}</span> <span class="star">￥</span>
                 </div>
              </div>
 

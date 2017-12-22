@@ -33,7 +33,7 @@ class RegisterController extends HomeBaseController
         if (cmf_is_user_login()) {
             return redirect($this->request->root() . '/');
         } else {
-            return $this->fetch();
+            return $this->fetch('register');
         }
     }
 

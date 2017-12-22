@@ -1,12 +1,14 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:40:"themes/simpleboot3/shop\login\login.html";i:1513956746;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:38:"themes/simpleboot3/public\scripts.html";i:1513602023;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:46:"themes/simpleboot3/shop\register\register.html";i:1513956589;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:38:"themes/simpleboot3/public\scripts.html";i:1513602023;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>login</title>
-	<link rel="stylesheet" href="__STATIC__/shop/css/login.css">
+	<title>register</title>
+	<link rel="stylesheet" href="__STATIC__/shop/css/register.css">
+	<script src="__STATIC__/shop/js/ajax3.0-min.js"></script>
 	<script src="__STATIC__/shop/js/jQuery.js"></script>
-	<!--<script src="__STATIC__/shop/js/login.js"></script>-->
+
+	<script src="__STATIC__/shop/js/register.js"></script>
 	
 <?php 
 /*可以加多个方法哟！*/
@@ -81,7 +83,7 @@ function _sp_helloworld3(){
 <script src="__STATIC__/js/wind.js"></script>
 	
 </head>
-<body>
+<body >
 	<div class="header">
 		<div class="top">
 			<!-- logo -->
@@ -89,42 +91,66 @@ function _sp_helloworld3(){
 			<img src="__STATIC__/shop/img/logo-left.jpg" alt="">
 			<div class="top-right">
 				<span>欢迎来到酒仙网！</span>
-				<span><a href="<?php echo cmf_url('shop/register/index'); ?>">免费注册</a></span>
+				<span><a href="">免费注册</a></span>
 				<span>帮助中心</span>
 			</div>
+
 		</div>
 	</div>
-	<div class="content">
-		<div class="main">
-			<div class="login ">
-				<p><a href="">账号登录</a></p>
-				<form class="js-ajax-form" action="<?php echo url('shop/login/doLogin'); ?>" method="post">
-					<div class="form-group">
-						<input type="text" id="input_username" name="username" placeholder="手机号/邮箱/用户名" class="form-control">
-					</div>
-					<div class="form-group">
-						<input type="password" id="input_password" name="password" placeholder="密码" class="form-control">
-					</div>
-					<div class="form-group">
-						<input type="hidden" name="redirect" value="">
-						<button class="btn btn-primary btn-block js-ajax-submit" type="submit" style="margin-left: 0px">确定</button>
-					</div>
+	<div class="content" >
+		<div class="main" >
+		 	<div class="register" style="background:url(__STATIC__/shop/img/autoplay.jpg);">
+		 		 <form class="js-ajax-form" action="<?php echo url('shop/Register/doRegister'); ?>" method="post">
 
-					<div class="form-group" style="text-align: center;">
-						<ul class="list-inline">
-							<li><a href="<?php echo cmf_url('shop/register/index'); ?>">现在注册</a></li>
-							<li><a href="<?php echo cmf_url('user/Login/findPassword'); ?>">忘记密码</a></li>
-						</ul>
-					</div>
-				</form>
+                            <div class="form-group">
+                                <input type="text" name="username" placeholder="手机号" class="form-control"
+                                       id="js-mobile-input">
+                            </div>
 
-			</div>
+                            <?php if(empty($is_open_registration) || (($is_open_registration instanceof \think\Collection || $is_open_registration instanceof \think\Paginator ) && $is_open_registration->isEmpty())): ?>
+                                <div class="form-group">
+                                    <div style="position: relative;">
+                                        <input type="text" name="code" placeholder="手机验证码" style="width:170px;"
+                                               class="form-control">
+                                        <a class="btn btn-success js-get-mobile-code"
+                                           style="width: 163px;position: absolute;top:0;right: 0;"
+                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#js-mobile-input"
+                                           data-url="<?php echo url('user/VerificationCode/send'); ?>"
+                                           data-init-second-left="60">获取手机验证码</a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="form-group">
+                                <input type="password" name="password" placeholder="密码" class="form-control">
+                            </div>
+
+                           
+
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-wait="1500"
+                                        style="margin-left: 0px;">确定注册
+                                </button>
+                            </div>
+
+                            <div class="form-group" style="text-align: center;">
+                                <p>
+                                    已有账号? <a href="<?php echo cmf_url('shop/Login/index'); ?>">点击此处登录</a>
+                                </p>
+                            </div>
+                        </form>
+		 	</div>
 		</div>
 	</div>
 	<div class="footer">
 		<div class="footer-main">
+
 			<p>购买前请确认达到法定饮酒年龄！酒仙网不销售任何含酒精产品给18岁以下人士！</p>
 		</div>		
+	</div>
+	<div class="mask">
+		<p>恭喜注册成功</p>
+		<span id="second">5</span>s后自动跳转
 	</div>
 	<!-- Le javascript
     ================================================== -->

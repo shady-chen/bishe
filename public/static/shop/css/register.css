@@ -122,8 +122,9 @@ body{
 
 
 .register{
-	width: 970px;
-	height: 560px;
+	margin:0 auto;
+	width: 670px;
+	height: 360px;
 	background: white;
 	box-sizing: border-box;
 	margin-top: 20px;

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:42:"themes/simpleboot3/shop\index\details.html";i:1513865851;s:42:"themes/simpleboot3/shop\public\header.html";i:1513863841;s:35:"themes/simpleboot3/public\head.html";i:1513602023;s:39:"themes/simpleboot3/public\function.html";i:1513602023;s:40:"themes/simpleboot3/shop\public\task.html";i:1513602023;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:42:"themes/simpleboot3/shop\index\details.html";i:1513865851;s:42:"themes/simpleboot3/shop\public\header.html";i:1513956969;s:40:"themes/simpleboot3/shop\public\task.html";i:1513957237;s:42:"themes/simpleboot3/shop\public\footer.html";i:1513773612;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,80 +9,7 @@
     <script src="__STATIC__/shop/js/jQuery.js"></script>
     <script src="__STATIC__/shop/js/myAutoplay.js"></script>
     <link rel="stylesheet" href="__STATIC__/shop/css/xiangqing.css">
-    
-<?php 
-/*可以加多个方法哟！*/
-function _sp_helloworld(){
-	echo "hello ThinkCMF!";
-}
 
-function _sp_helloworld2(){
-	echo "hello ThinkCMF2!";
-}
-
-
-function _sp_helloworld3(){
-	echo "hello ThinkCMF3!";
-}
-
- ?>
-<meta name="author" content="ThinkCMF">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-<!-- Set render engine for 360 browser -->
-<meta name="renderer" content="webkit">
-
-<!-- No Baidu Siteapp-->
-<meta http-equiv="Cache-Control" content="no-siteapp"/>
-
-<!-- HTML5 shim for IE8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<![endif]-->
-<link rel="icon" href="__TMPL__/public/assets/images/favicon.png" type="image/png">
-<link rel="shortcut icon" href="__TMPL__/public/assets/images/favicon.png" type="image/png">
-<link href="__TMPL__/public/assets/simpleboot3/themes/simpleboot3/bootstrap.min.css" rel="stylesheet">
-<link href="__TMPL__/public/assets/simpleboot3/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
-      type="text/css">
-<!--[if IE 7]>
-<link rel="stylesheet" href="__TMPL__/public/assets/simpleboot3/font-awesome/4.4.0/css/font-awesome-ie7.min.css">
-<![endif]-->
-<!-- <link href="__TMPL__/public/assets/css/style.css" rel="stylesheet"> -->
-<style>
-    /*html{filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(1);}*/
-    #backtotop {
-        position: fixed;
-        bottom: 50px;
-        right: 20px;
-        display: none;
-        cursor: pointer;
-        font-size: 50px;
-        z-index: 9999;
-    }
-
-    #backtotop:hover {
-        color: #333
-    }
-
-    #main-menu-user li.user {
-        display: none
-    }
-</style>
-<script type="text/javascript">
-    //全局变量
-    var GV = {
-        ROOT: "__ROOT__/",
-        WEB_ROOT: "__WEB_ROOT__/",
-        JS_ROOT: "static/js/"
-    };
-</script>
-<script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
-<script src="__TMPL__/public/assets/js/jquery-migrate-1.2.1.js"></script>
-<script src="__STATIC__/js/wind.js"></script>
-	
-</head>
 <?php 
     $cur_user = session('user');
     $shuliang = session('shuliang')
@@ -296,6 +223,8 @@ function _sp_helloworld3(){
         height:40px;
         line-height:50px;
         font-size:18px;
+        border-bottom: 1px solid gray;
+        /*background: #ee9636;*/
     }
     .tips-body
     {
@@ -328,6 +257,8 @@ function _sp_helloworld3(){
         margin-right:15px;
         cursor:pointer;
         font-weight: 700;
+        background: #3dfec9;
+        color: #fff;
     }
 
 </style>
